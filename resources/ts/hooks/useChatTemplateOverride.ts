@@ -7,21 +7,21 @@ const responseSchema = ChatTemplateSchema.nullable();
 
 export function useChatTemplateOverride({
   agentId,
-  managementAddr,
+  fetchBaseAddr,
 }: {
   agentId: string;
-  managementAddr: string;
+  fetchBaseAddr: string;
 }) {
   const produceFetchPromise = useCallback(
     function (signal: AbortSignal) {
       return fetch(
-        `//${managementAddr}/api/v1/agent/${agentId}/chat_template_override`,
+        `${fetchBaseAddr}/api/v1/agent/${agentId}/chat_template_override`,
         {
           signal,
         },
       );
     },
-    [agentId, managementAddr],
+    [agentId, fetchBaseAddr],
   );
 
   const result = useFetchJson({

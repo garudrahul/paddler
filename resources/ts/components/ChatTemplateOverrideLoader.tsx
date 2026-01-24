@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import { PaddlerConfigurationContext } from "../contexts/PaddlerConfigurationContext";
 import { useChatTemplateOverride } from "../hooks/useChatTemplateOverride";
 import { matchFetchJsonState } from "../matchFetchJsonState";
 import { type Agent } from "../schemas/Agent";
@@ -14,17 +15,17 @@ import {
 
 export function ChatTemplateOverrideLoader({
   agent,
-  managementAddr,
   onClose,
 }: {
   agent: Agent;
-  managementAddr: string;
   onClose(this: void): void;
 }) {
+  const { fetchBaseAddr } = useContext(PaddlerConfigurationContext);
   const { id, name } = agent;
+
   const loadingState = useChatTemplateOverride({
     agentId: id,
-    managementAddr,
+    fetchBaseAddr,
   });
 
   return (

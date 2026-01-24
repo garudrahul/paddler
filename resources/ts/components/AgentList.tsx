@@ -39,10 +39,8 @@ function displayLastPathPart(path: string | null): string {
 
 export function AgentList({
   agents,
-  managementAddr,
 }: {
   agents: Array<Agent>;
-  managementAddr: string;
 }) {
   return (
     <div className={agentList}>
@@ -77,18 +75,14 @@ export function AgentList({
                 </div>
               )}
             </div>
+
             <div className={agentList__agent__metadata}>
-              <ModelMetadataPreviewButton
-                agent={agent}
-                managementAddr={managementAddr}
-              />
+              <ModelMetadataPreviewButton agent={agent} />
               {uses_chat_template_override && (
-                <ModelChatTemplateOverridePreviewButton
-                  agent={agent}
-                  managementAddr={managementAddr}
-                />
+                <ModelChatTemplateOverridePreviewButton agent={agent} />
               )}
             </div>
+
             {download_total > 0 ? (
               <div className={agentList__agent__download}>
                 <progress max={download_total} value={download_current} />
@@ -112,6 +106,7 @@ export function AgentList({
                 )}
               </div>
             )}
+
             <div className={agentList__agent__status}>
               <AgentListAgentStatus agent={agent} />
             </div>

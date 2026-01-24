@@ -4,17 +4,17 @@ import { BalancerDesiredStateSchema } from "../schemas/BalancerDesiredState";
 import { useFetchJson } from "./useFetchJson";
 
 export function useBalancerDesiredState({
-  managementAddr,
+  fetchBaseAddr,
 }: {
-  managementAddr: string;
+  fetchBaseAddr: string;
 }) {
   const produceFetchPromise = useCallback(
     function (signal: AbortSignal) {
-      return fetch(`//${managementAddr}/api/v1/balancer_desired_state`, {
+      return fetch(`${fetchBaseAddr}/api/v1/balancer_desired_state`, {
         signal,
       });
     },
-    [managementAddr],
+    [fetchBaseAddr],
   );
 
   const result = useFetchJson({

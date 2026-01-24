@@ -9,11 +9,11 @@ import { BufferedRequests } from "./BufferedRequests";
 import { dashboardSectionStreamLoader } from "./dashboardSectionStreamLoader.module.css";
 
 export function BufferedRequestsStream() {
-  const { managementAddr } = useContext(PaddlerConfigurationContext);
+  const { fetchBaseAddr } = useContext(PaddlerConfigurationContext);
 
   const eventSourceUpdateState = useEventSourceUpdates({
     schema: BufferedRequestsResponseSchema,
-    endpoint: `//${managementAddr}/api/v1/buffered_requests/stream`,
+    endpoint: `${fetchBaseAddr}/api/v1/buffered_requests/stream`,
   });
 
   return matchEventSourceUpdateState(eventSourceUpdateState, {

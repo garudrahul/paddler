@@ -7,28 +7,22 @@ import { modelChatTemplateOverridePreviewButton } from "./ModelChatTemplateOverr
 
 export function ModelChatTemplateOverridePreviewButton({
   agent,
-  managementAddr,
 }: {
   agent: Agent;
-  managementAddr: string;
 }) {
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
   const onClick = useCallback(
     function (evt: MouseEvent<HTMLButtonElement>) {
       evt.preventDefault();
-
       setIsPreviewVisible(true);
     },
-    [setIsPreviewVisible],
+    [],
   );
 
-  const onClose = useCallback(
-    function () {
-      setIsPreviewVisible(false);
-    },
-    [setIsPreviewVisible],
-  );
+  const onClose = useCallback(function () {
+    setIsPreviewVisible(false);
+  }, []);
 
   return (
     <>
@@ -39,11 +33,7 @@ export function ModelChatTemplateOverridePreviewButton({
         Custom chat template
       </button>
       {isPreviewVisible && (
-        <ChatTemplateOverrideLoader
-          agent={agent}
-          managementAddr={managementAddr}
-          onClose={onClose}
-        />
+        <ChatTemplateOverrideLoader agent={agent} onClose={onClose} />
       )}
     </>
   );

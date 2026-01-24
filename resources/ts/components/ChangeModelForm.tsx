@@ -41,7 +41,7 @@ export function ChangeModelForm({
   const { chatTemplateOverride, useChatTemplateOverride } =
     useContext(ChatTemplateContext);
   const { parameters } = useContext(InferenceParametersContext);
-  const { managementAddr } = useContext(PaddlerConfigurationContext);
+  const { fetchBaseAddr } = useContext(PaddlerConfigurationContext);
   const { agentDesiredModelState, modelUri, setModelUri } =
     useAgentDesiredModelUrl({
       defaultModelUri,
@@ -83,7 +83,7 @@ export function ChangeModelForm({
         return;
       }
 
-      fetch(`//${managementAddr}/api/v1/balancer_desired_state`, {
+      fetch(`${fetchBaseAddr}/api/v1/balancer_desired_state`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export function ChangeModelForm({
           console.error("Error updating agent desired state:", error);
         });
     },
-    [managementAddr, navigate, balancerDesiredState],
+    [fetchBaseAddr, navigate, balancerDesiredState],
   );
 
   return (

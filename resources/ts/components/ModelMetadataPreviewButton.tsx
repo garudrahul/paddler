@@ -7,28 +7,22 @@ import { modelMetadataPreviewButton } from "./ModelMetadataPreviewButton.module.
 
 export function ModelMetadataPreviewButton({
   agent,
-  managementAddr,
 }: {
   agent: Agent;
-  managementAddr: string;
 }) {
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
 
   const onClick = useCallback(
     function (evt: MouseEvent<HTMLButtonElement>) {
       evt.preventDefault();
-
       setIsDetailsVisible(true);
     },
-    [setIsDetailsVisible],
+    [],
   );
 
-  const onClose = useCallback(
-    function () {
-      setIsDetailsVisible(false);
-    },
-    [setIsDetailsVisible],
-  );
+  const onClose = useCallback(function () {
+    setIsDetailsVisible(false);
+  }, []);
 
   return (
     <>
@@ -36,11 +30,7 @@ export function ModelMetadataPreviewButton({
         Metadata
       </button>
       {isDetailsVisible && (
-        <ModelMetadataLoader
-          agent={agent}
-          managementAddr={managementAddr}
-          onClose={onClose}
-        />
+        <ModelMetadataLoader agent={agent} onClose={onClose} />
       )}
     </>
   );

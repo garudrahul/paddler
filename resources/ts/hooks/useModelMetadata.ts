@@ -12,21 +12,21 @@ const responseSchema = z
 
 export function useModelMetadata({
   agentId,
-  managementAddr,
+  fetchBaseAddr,
 }: {
   agentId: string;
-  managementAddr: string;
+  fetchBaseAddr: string;
 }) {
   const produceFetchPromise = useCallback(
     function (signal: AbortSignal) {
       return fetch(
-        `//${managementAddr}/api/v1/agent/${agentId}/model_metadata`,
+        `${fetchBaseAddr}/api/v1/agent/${agentId}/model_metadata`,
         {
           signal,
         },
       );
     },
-    [agentId, managementAddr],
+    [agentId, fetchBaseAddr],
   );
 
   const result = useFetchJson({

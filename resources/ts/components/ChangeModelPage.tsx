@@ -28,8 +28,9 @@ function modelSchemaToUrl(model: AgentDesiredModel): string {
 }
 
 export function ChangeModelPage() {
-  const { managementAddr } = useContext(PaddlerConfigurationContext);
-  const loadingState = useBalancerDesiredState({ managementAddr });
+  const { fetchBaseAddr } = useContext(PaddlerConfigurationContext);
+
+  const loadingState = useBalancerDesiredState({ fetchBaseAddr });
 
   return matchFetchJsonState(loadingState, {
     empty() {

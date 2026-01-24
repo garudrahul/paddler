@@ -10,10 +10,11 @@ import { agentListStream__placeholder } from "./AgentListStream.module.css";
 import { dashboardSectionStreamLoader } from "./dashboardSectionStreamLoader.module.css";
 
 export function AgentListStream() {
-  const { managementAddr } = useContext(PaddlerConfigurationContext);
+  const { fetchBaseAddr } = useContext(PaddlerConfigurationContext);
+
   const eventSourceUpdateState = useEventSourceUpdates({
     schema: AgentsResponseSchema,
-    endpoint: `//${managementAddr}/api/v1/agents/stream`,
+    endpoint: `${fetchBaseAddr}/api/v1/agents/stream`,
   });
 
   return matchEventSourceUpdateState(eventSourceUpdateState, {
@@ -41,7 +42,7 @@ export function AgentListStream() {
         );
       }
 
-      return <AgentList agents={agents} managementAddr={managementAddr} />;
+      return <AgentList agents={agents} />;
     },
     deserializationError() {
       return (

@@ -4,7 +4,10 @@ export type PaddlerConfigurationContextValue = {
   bufferedRequestTimeoutMillis: number;
   compatOpenAIAddr: string;
   inferenceAddr: string;
-  managementAddr: string;
+
+  managementAddr: string; // control plane
+  fetchBaseAddr: string;  // data plane (streams + GETs)
+
   maxBufferedRequests: number;
   statsdAddr: string;
   statsdPrefix: string;
@@ -23,6 +26,9 @@ export const PaddlerConfigurationContext =
       throw new Error("PaddlerConfigurationContext not provided");
     },
     get managementAddr(): never {
+      throw new Error("PaddlerConfigurationContext not provided");
+    },
+    get fetchBaseAddr(): never {
       throw new Error("PaddlerConfigurationContext not provided");
     },
     get maxBufferedRequests(): never {
